@@ -75,12 +75,7 @@
   main, .hero-inner, .footer-inner { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
 
   header { position: relative; padding: 5.2rem 0 4.2rem; }
-  .hero-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.02fr) minmax(420px, .98fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: center;
-  }
+  .hero-inner { max-width: 46rem; }
   .kanji {
     display: inline-flex;
     align-items: center;
@@ -139,94 +134,63 @@
   .epigraph .jp { color: var(--ink); display: block; margin-bottom: .25rem; }
   .epigraph .src { color: var(--ink-faint); font-size: .77rem; margin-top: .22rem; }
 
-  /* The river of succession */
-  .river-map {
-    position: relative;
-    min-height: 470px;
-    border: 1px solid var(--rule);
-    border-radius: 18px;
-    background:
-      linear-gradient(145deg, var(--panel), transparent),
-      var(--bg-raised);
-    box-shadow: 0 30px 70px rgba(0,0,0,.08);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .river-map::before {
-    content: "KAWA / THE RIVER OF SUCCESSION";
-    position:absolute; top:1rem; left:1.1rem; z-index:5;
-    font:600 .64rem/1 var(--mono); letter-spacing:.12em; color:var(--ink-faint);
-  }
-  .river-map::after {
-    content:""; position:absolute; inset:0; z-index:-2;
-    background-image:radial-gradient(var(--rule) 1px, transparent 1px);
-    background-size:22px 22px; opacity:.42;
-  }
-  .time-axis { position:absolute; left:1.1rem; right:1.1rem; top:3rem; display:flex; justify-content:space-between; font:.6rem var(--mono); color:var(--ink-faint); z-index:4; }
-  .river-water { position:absolute; inset:3.9rem .7rem 2.4rem; z-index:-1; }
-  .river-water svg { width:100%; height:100%; overflow:visible; }
-  .river-path { fill:none; stroke:var(--accent); stroke-width:42; opacity:.12; stroke-linecap:round; }
-  .river-edge { fill:none; stroke:var(--accent); stroke-width:1.2; opacity:.65; stroke-linecap:round; stroke-dasharray:7 8; animation: drift 9s linear infinite; }
-  .river-branch { fill:none; stroke:var(--accent); stroke-width:17; opacity:.09; stroke-linecap:round; }
-  .river-branch-edge { fill:none; stroke:var(--accent); stroke-width:1; opacity:.42; stroke-dasharray:5 7; animation: drift 12s linear infinite reverse; }
-  @keyframes drift { to { stroke-dashoffset:-120; } }
-
-  .era {
-    position:absolute; z-index:3;
-    min-width:106px; max-width:132px;
-    padding:.58rem .68rem;
-    border:1px solid var(--rule); border-radius:8px;
-    background:color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter:blur(8px);
-    font:.68rem/1.35 var(--mono);
-    box-shadow:0 8px 22px rgba(0,0,0,.05);
-  }
-  .era strong { display:block; color:var(--ink); font-size:.7rem; margin-bottom:.12rem; }
-  .era span { color:var(--ink-faint); }
-  .era .death { color:var(--danger); }
-  .e1 { left:5%; top:19%; }
-  .e2 { left:27%; top:30%; }
-  .e3 { left:52%; top:18%; }
-  .e4 { right:5%; top:29%; }
-
-  .gate {
-    position:absolute; z-index:4; left:48%; top:52%; transform:translate(-50%,-50%);
-    width:126px; padding:.72rem .75rem; text-align:center;
-    border:1px solid var(--accent); border-radius:10px;
-    background:var(--bg); box-shadow:0 0 0 7px var(--accent-soft), 0 12px 34px rgba(0,0,0,.08);
-    font:.63rem/1.45 var(--mono); color:var(--ink-faint);
-  }
-  .gate b { color:var(--accent); display:block; font-size:.67rem; letter-spacing:.05em; margin-bottom:.2rem; }
-  .fate {
-    position:absolute; z-index:3; right:5%; bottom:19%;
-    display:grid; gap:.35rem; font:.61rem/1.25 var(--mono);
-  }
-  .fate span { padding:.33rem .5rem; border:1px solid var(--rule); border-radius:999px; background:var(--bg); color:var(--ink-faint); }
-  .fate .continue { color:var(--ok); }
-  .fate .end { color:var(--danger); }
-
-  .foam {
-    position:absolute; z-index:2; border:1px solid var(--rule); border-radius:999px;
-    background:var(--panel); padding:.28rem .5rem; font:.58rem var(--mono); color:var(--ink-faint);
-    animation: foam 7s ease-in-out infinite;
-  }
-  .foam.f1 { left:15%; top:58%; }
-  .foam.f2 { left:37%; top:68%; animation-delay:-2.2s; }
-  .foam.f3 { left:62%; top:59%; animation-delay:-4s; }
-  @keyframes foam { 0%,100% { transform:translateY(0); opacity:.58; } 50% { transform:translateY(-7px); opacity:1; } }
-
-  .bedrock {
-    position:absolute; left:1rem; right:1rem; bottom:.8rem; z-index:4;
-    display:flex; gap:.38rem; align-items:center; overflow:hidden;
-    font:.58rem var(--mono); color:var(--ink-faint); white-space:nowrap;
-  }
-  .bedrock::before { content:"history"; color:var(--accent); font-weight:600; margin-right:.2rem; }
-  .bedrock i { width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.45; flex:0 0 auto; }
-  .river-note { position:absolute; left:1rem; bottom:3.2rem; z-index:4; font:.61rem/1.45 var(--mono); color:var(--ink-faint); }
-  .river-note b { color:var(--ink); font-weight:600; }
 
   section { padding: 4.8rem 0; border-top: 1px solid var(--rule); position:relative; }
-  .section-head { display:grid; grid-template-columns: 180px 1fr; gap: 2rem; align-items:start; margin-bottom:2.1rem; }
+  .section-head { display:grid; grid-templ  /* #197 — the river of succession, full-bleed. The river is larger than any
+     participant, mission, Basin, or card: nothing is ever placed on the water. */
+  .belt { position:relative; width:100vw; margin-left:calc(50% - 50vw); overflow:hidden;
+          border-block:1px solid var(--rule); background:
+          linear-gradient(to bottom, transparent 78%, var(--accent-soft) 100%); }
+  .belt-canvas { display:flex; width:max-content; animation: belt-drift 38s linear infinite; }
+  .belt svg { width:2400px; height:clamp(300px, 40vw, 430px); flex:0 0 auto; display:block; }
+  @keyframes belt-drift { to { transform: translateX(-2400px); } }
+  .belt-caption { position:absolute; left:max(1rem, calc(50vw - 560px)); top:1rem; z-index:2;
+          font:.63rem/1.5 var(--mono); color:var(--ink-faint); pointer-events:none; }
+  .belt-caption b { color:var(--ink); font-weight:600; }
+  .belt-axis { position:absolute; right:max(1rem, calc(50vw - 560px)); top:1rem; z-index:2;
+          font:.63rem var(--mono); color:var(--ink-faint); pointer-events:none; }
+  .ch  { fill:none; stroke:var(--accent); stroke-linecap:round; }
+  .chA { stroke-width:52; opacity:.13; }
+  .chB { stroke-width:30; opacity:.10; }
+  .chC { stroke-width:22; opacity:.09; }
+  .chD { stroke-width:24; opacity:.11; }
+  .edge { fill:none; stroke:var(--accent); stroke-width:1.1; opacity:.5;
+          stroke-dasharray:7 9; animation: edge-drift 10s linear infinite; }
+  @keyframes edge-drift { to { stroke-dashoffset:-128; } }
+  .fm { fill:var(--accent); animation: foam-breathe 6s ease-in-out infinite; }
+  @keyframes foam-breathe { 0%,100% { opacity:.15; } 50% { opacity:.65; } }
+  .particle { fill:var(--accent-strong); opacity:.8; }
+  .sedi { fill:var(--accent); opacity:.05; }
+  .sedi-line { stroke:var(--accent); stroke-width:5; opacity:.28; stroke-dasharray:2 11; }
+  .lesson { stroke:var(--accent); stroke-width:1; opacity:.4; stroke-dasharray:2 5; }
+  .terminus { fill:none; stroke:var(--danger); stroke-width:1.4; opacity:.75; }
+  .spring { fill:none; stroke:var(--ok); stroke-width:1.4; opacity:.8; }
+  .belt-legend { display:flex; gap:1.4rem; flex-wrap:wrap; justify-content:center;
+          font:.63rem var(--mono); color:var(--ink-faint); padding:.55rem 1rem; }
+  .belt-legend b { color:var(--ink-soft); font-weight:600; }
+  @media (prefers-reduced-motion: reduce) {
+    .belt { overflow-x:auto; }
+    .belt-canvas, .edge { animation:none; }
+    .fm { animation:none; opacity:.4; }
+    .particle { display:none; }
+  }
+
+  /* succession gate — below the river, never on it */
+  .gatezone { margin-top:2.6rem; }
+  .gate-q { display:flex; gap:.55rem; flex-wrap:wrap; margin:1rem 0 1.2rem; }
+  .gate-q span { font:.72rem/1.4 var(--mono); color:var(--ink-soft); border:1px solid var(--rule);
+          border-radius:999px; padding:.38rem .7rem; background:var(--panel); }
+  .verdicts { display:flex; gap:.5rem; flex-wrap:wrap; font:600 .78rem var(--mono); }
+  .verdicts span { padding:.45rem .85rem; border-radius:7px; border:1px solid var(--rule); }
+  .verdicts .v-continue { color:var(--ok); border-color:var(--ok); }
+  .verdicts .v-terminate { color:var(--danger); border-color:var(--danger); }
+  .gate-maxim { margin-top:1.3rem; font-family:var(--serif); font-size:1.06rem; }
+  details.layer { border:1px solid var(--rule); border-radius:9px; background:var(--panel);
+          padding:.75rem 1rem; margin-top:.6rem; }
+  details.layer summary { cursor:pointer; font:600 .78rem var(--mono); letter-spacing:.05em;
+          color:var(--ink); }
+  details.layer p { margin-top:.55rem; color:var(--ink-soft); font-size:.92rem; }
+ate-columns: 180px 1fr; gap: 2rem; align-items:start; margin-bottom:2.1rem; }
   .eyebrow { font: 600 .68rem/1.2 var(--mono); letter-spacing:.13em; text-transform:uppercase; color:var(--accent); padding-top:.48rem; }
   h2 { font-family:var(--serif); font-weight:500; font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.12; letter-spacing:-.015em; }
   p + p { margin-top: 1rem; }
@@ -301,8 +265,7 @@
   @media (max-width: 900px) {
     main, .hero-inner, .footer-inner { width:min(100% - 2rem, 720px); }
     header { padding-top:3.5rem; }
-    .hero-inner { grid-template-columns:1fr; }
-    .river-map { min-height:450px; }
+
     .section-head { grid-template-columns:1fr; gap:.5rem; }
     .cards, .promises, .principles { grid-template-columns:1fr; }
     .mortality-grid { grid-template-columns:1fr 1fr; }
@@ -313,12 +276,8 @@
   }
   @media (max-width: 560px) {
     body { font-size:16px; }
-    .river-map { min-height:500px; }
-    .era { min-width:92px; max-width:105px; font-size:.59rem; padding:.48rem; }
-    .e1 { left:3%; top:17%; } .e2 { left:29%; top:30%; } .e3 { left:53%; top:17%; } .e4 { right:3%; top:31%; }
-    .gate { width:108px; top:55%; }
-    .foam.f1 { left:7%; } .foam.f2 { left:35%; } .foam.f3 { left:61%; }
-    .fate { right:3%; bottom:20%; }
+
+
     .mortality-grid { grid-template-columns:1fr; }
     .compare-row { grid-template-columns:1fr 28px 1fr; }
     .compare-row > div { padding:.7rem .65rem; }
@@ -349,41 +308,31 @@
       </blockquote>
     </div>
 
-    <div class="river-map" aria-label="Kawa shown as a river of succession across time, where participants, missions and authority may end while history remains">
-      <div class="time-axis"><span>past / birth</span><span>future / succession →</span></div>
-      <div class="river-water" aria-hidden="true">
-        <svg viewBox="0 0 700 350" preserveAspectRatio="none">
-          <path class="river-path" d="M-20 105 C110 60, 185 160, 300 122 S500 72, 720 155"/>
-          <path class="river-edge" d="M-20 105 C110 60, 185 160, 300 122 S500 72, 720 155"/>
-          <path class="river-branch" d="M292 124 C360 150, 365 235, 500 250 S635 220, 730 245"/>
-          <path class="river-branch-edge" d="M292 124 C360 150, 365 235, 500 250 S635 220, 730 245"/>
-        </svg>
-      </div>
-
-      <div class="era e1"><strong>Human A</strong><span>joins / observes</span></div>
-      <div class="era e2"><strong>Agent A</strong><span>works / learns</span><span class="death">session ends ×</span></div>
-      <div class="era e3"><strong>Agent B</strong><span>rebuilds context</span></div>
-      <div class="era e4"><strong>Human B</strong><span>new authority</span></div>
-
-      <div class="gate"><b>SUCCESSION GATE</b>mission valid?<br>authority live?<br>plan current?<br>evidence adequate?</div>
-
-      <div class="foam f1">view / SA</div>
-      <div class="foam f2">narrative dissolves</div>
-      <div class="foam f3">orientation rebuilt</div>
-
-      <div class="fate">
-        <span class="continue">continue →</span>
-        <span class="end">terminate ×</span>
-        <span>re-found ↗</span>
-      </div>
-
-      <div class="river-note"><b>Kawa is not the center.</b><br>The river is the whole succession.</div>
-      <div class="bedrock"><i></i>event<i></i>evidence<i></i>decision<i></i>result<i></i>revocation<i></i>lesson<i></i>correction<i></i>history remains</div>
     </div>
-  </div>
 </header>
 
+<div class="belt" role="img" aria-label="Kawa drawn as a wide river flowing from past to future: mission channels branch into parallel basins, merge back, terminate, or are re-founded from the sediment of records, while participants surface and dissolve as foam. The river is the whole succession, not a hub.">
+  <div class="belt-caption"><b>Kawa is not the center.</b><br>The river is the whole succession.</div>
+  <div class="belt-axis">past ⟶ future</div>
+  <div class="belt-canvas" aria-hidden="true">
+    <svg viewBox="0 0 2400 430" preserveAspectRatio="xMidYMid slice"><g id="riverpat"><rect class="sedi" x="0" y="344" width="2400" height="86"/><line class="sedi-line" x1="40" y1="366" x2="40" y2="384"/><line class="sedi-line" x1="114" y1="366" x2="114" y2="384"/><line class="sedi-line" x1="188" y1="366" x2="188" y2="384"/><line class="sedi-line" x1="262" y1="366" x2="262" y2="384"/><line class="sedi-line" x1="336" y1="366" x2="336" y2="384"/><line class="sedi-line" x1="410" y1="366" x2="410" y2="384"/><line class="sedi-line" x1="484" y1="366" x2="484" y2="384"/><line class="sedi-line" x1="558" y1="366" x2="558" y2="384"/><line class="sedi-line" x1="632" y1="366" x2="632" y2="384"/><line class="sedi-line" x1="706" y1="366" x2="706" y2="384"/><line class="sedi-line" x1="780" y1="366" x2="780" y2="384"/><line class="sedi-line" x1="854" y1="366" x2="854" y2="384"/><line class="sedi-line" x1="928" y1="366" x2="928" y2="384"/><line class="sedi-line" x1="1002" y1="366" x2="1002" y2="384"/><line class="sedi-line" x1="1076" y1="366" x2="1076" y2="384"/><line class="sedi-line" x1="1150" y1="366" x2="1150" y2="384"/><line class="sedi-line" x1="1224" y1="366" x2="1224" y2="384"/><line class="sedi-line" x1="1298" y1="366" x2="1298" y2="384"/><line class="sedi-line" x1="1372" y1="366" x2="1372" y2="384"/><line class="sedi-line" x1="1446" y1="366" x2="1446" y2="384"/><line class="sedi-line" x1="1520" y1="366" x2="1520" y2="384"/><line class="sedi-line" x1="1594" y1="366" x2="1594" y2="384"/><line class="sedi-line" x1="1668" y1="366" x2="1668" y2="384"/><line class="sedi-line" x1="1742" y1="366" x2="1742" y2="384"/><line class="sedi-line" x1="1816" y1="366" x2="1816" y2="384"/><line class="sedi-line" x1="1890" y1="366" x2="1890" y2="384"/><line class="sedi-line" x1="1964" y1="366" x2="1964" y2="384"/><line class="sedi-line" x1="2038" y1="366" x2="2038" y2="384"/><line class="sedi-line" x1="2112" y1="366" x2="2112" y2="384"/><line class="sedi-line" x1="2186" y1="366" x2="2186" y2="384"/><line class="sedi-line" x1="2260" y1="366" x2="2260" y2="384"/><line class="sedi-line" x1="2334" y1="366" x2="2334" y2="384"/><path id="chA" class="ch chA" d="M -10 170 C 200 150 350 196 600 181 C 850 166 1000 206 1250 186 C 1500 168 1700 191 1950 178 C 2150 170 2320 170 2410 170"/><path class="edge" d="M -10 170 C 200 150 350 196 600 181 C 850 166 1000 206 1250 186 C 1500 168 1700 191 1950 178 C 2150 170 2320 170 2410 170"/><path id="chB" class="ch chB" d="M 430 178 C 560 216 620 262 780 268 C 950 274 1060 262 1170 240 C 1265 221 1315 196 1385 184"/><path class="edge" d="M 430 178 C 560 216 620 262 780 268 C 950 274 1060 262 1170 240 C 1265 221 1315 196 1385 184"/><path id="chC" class="ch chC" d="M 900 172 C 1000 140 1060 118 1180 112 C 1290 107 1360 116 1428 128"/><path class="edge" d="M 900 172 C 1000 140 1060 118 1180 112 C 1290 107 1360 116 1428 128"/><path id="chD" class="ch chD" d="M 1700 235 C 1820 226 1950 231 2080 208 C 2180 192 2255 180 2325 174"/><path class="edge" d="M 1700 235 C 1820 226 1950 231 2080 208 C 2180 192 2255 180 2325 174"/><circle class="terminus" cx="1434" cy="128" r="7"/><line class="lesson" x1="1434" y1="138" x2="1434" y2="360"/><line class="lesson" x1="1668" y1="360" x2="1698" y2="246"/><circle class="spring" cx="1700" cy="235" r="7"/><circle class="fm" cx="150" cy="158" r="3" style="animation-delay:-0s"/><circle class="fm" cx="340" cy="182" r="2" style="animation-delay:-1.3s"/><circle class="fm" cx="520" cy="196" r="3" style="animation-delay:-2.7s"/><circle class="fm" cx="700" cy="175" r="2" style="animation-delay:-4.1s"/><circle class="fm" cx="830" cy="262" r="2" style="animation-delay:-0.9s"/><circle class="fm" cx="980" cy="266" r="3" style="animation-delay:-2.2s"/><circle class="fm" cx="1090" cy="130" r="2" style="animation-delay:-3.5s"/><circle class="fm" cx="1240" cy="118" r="2" style="animation-delay:-1.7s"/><circle class="fm" cx="1330" cy="190" r="3" style="animation-delay:-0.4s"/><circle class="fm" cx="1560" cy="175" r="2" style="animation-delay:-2.9s"/><circle class="fm" cx="1780" cy="232" r="2" style="animation-delay:-4.6s"/><circle class="fm" cx="1900" cy="222" r="3" style="animation-delay:-1.1s"/><circle class="fm" cx="2050" cy="205" r="2" style="animation-delay:-3.2s"/><circle class="fm" cx="2230" cy="176" r="3" style="animation-delay:-5.0s"/></g><circle class="particle" r="3"><animateMotion dur="30s" repeatCount="indefinite"><mpath href="#chA"/></animateMotion></circle><circle class="particle" r="2.4"><animateMotion dur="24s" begin="-9s" repeatCount="indefinite"><mpath href="#chB"/></animateMotion></circle><circle class="particle" r="2.4"><animateMotion dur="18s" begin="-4s" repeatCount="indefinite"><mpath href="#chD"/></animateMotion></circle><circle class="particle" r="3" opacity=".7"><animateMotion dur="26s" begin="-14s" repeatCount="indefinite"><mpath href="#chA"/></animateMotion></circle></svg>
+    <svg viewBox="0 0 2400 430" preserveAspectRatio="xMidYMid slice"><use href="#riverpat"/></svg>
+  </div>
+</div>
+<div class="belt-legend"><span><b>foam</b> participants &amp; understanding</span><span><b>channels</b> missions &amp; Basins — branch · run parallel · merge · end · re-found</span><span><b>sediment</b> records remain</span></div>
+
 <main>
+  <section class="gatezone">
+    <div class="section-head"><div class="eyebrow">00 / succession gate</div><h2>What can continue should not automatically continue.</h2></div>
+    <p class="lead">Continuity itself must be justified. Before a successor inherits anything, the gate asks:</p>
+    <div class="gate-q"><span>mission still valid?</span><span>authority still live?</span><span>plan still current?</span><span>evidence still adequate?</span><span>unresolved corruption or contradiction?</span></div>
+    <div class="verdicts"><span class="v-continue">continue</span><span class="v-terminate">terminate</span><span>reconcile</span><span>re-found</span></div>
+    <p class="gate-maxim">Succession is not cloning. Do not preserve dead authority or inherited corruption.</p>
+    <details class="layer"><summary>FOAM — participants &amp; understanding</summary><p>Humans, agents, runtimes, views, situational awareness, summaries, narratives. They appear, dissolve, and re-form; no observer's understanding is the river itself.</p></details>
+    <details class="layer"><summary>CHANNELS — missions, Basins &amp; succession</summary><p>Mission lineages flow, branch into parallel Basins, cross, merge, and reconcile. Some end — completion, withdrawal, invalidation — and an ending is a recorded outcome, not a failure of continuity. When a lineage loses legitimacy, a new one is re-founded from the record, not cloned from the corpse.</p></details>
+    <details class="layer"><summary>SEDIMENT — the records that remain</summary><p>Events, evidence, decisions, execution observations, corrections, revocations, supersessions, and the lessons of dead lineages. Divergence is preserved and reconciled — never silently overwritten by the last writer.</p></details>
+  </section>
+
   <section>
     <div class="cards">
       <article class="card"><span class="n">01</span><h3>CONTINUITY</h3><p>Participants change.<br>Work may continue.</p></article>
