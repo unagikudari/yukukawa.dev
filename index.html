@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kawa — Agents are expendable. The mission is not.</title>
+<meta name="description" content="Kawa is an event-sourced continuity and authority substrate for organizations where humans and AI agents act over time. Change the agent. Keep the work.">
+<meta property="og:title" content="Kawa">
+<meta property="og:description" content="Agents are expendable. The mission is not. An event-sourced continuity and authority substrate for humans and AI agents.">
+<meta property="og:url" content="https://yukukawa.dev/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E5%B7%9D%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --bg-raised: #f1efe9;
+    --ink: #21201c;
+    --ink-soft: #5c594f;
+    --ink-faint: #8a867a;
+    --accent: #2f6e8e;
+    --accent-soft: #2f6e8e22;
+    --rule: #dcd8cc;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161a;
+      --bg-raised: #1a2026;
+      --ink: #ddd8cd;
+      --ink-soft: #a29d90;
+      --ink-faint: #6f6b60;
+      --accent: #74aac7;
+      --accent-soft: #74aac71f;
+      --rule: #2b333b;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---- hero ---- */
+  header {
+    max-width: 44rem; margin: 0 auto; padding: 5.5rem 1.5rem 3rem;
+  }
+  .kanji {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--accent);
+    letter-spacing: .35em;
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 3.6rem);
+    letter-spacing: .01em;
+    line-height: 1.1;
+    margin-bottom: 1.6rem;
+  }
+  .thesis {
+    font-family: var(--serif);
+    font-size: clamp(1.25rem, 3.4vw, 1.55rem);
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 34rem;
+  }
+  .thesis em { font-style: normal; color: var(--accent); }
+  .epigraph {
+    margin-top: 2.6rem;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--accent);
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    font-size: .95rem;
+    max-width: 32rem;
+  }
+  .epigraph .jp { display: block; margin-bottom: .3rem; letter-spacing: .04em; }
+  .epigraph .src { color: var(--ink-faint); font-size: .82rem; }
+
+  .cta { margin-top: 2.8rem; display: flex; gap: .9rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: .55rem 1.15rem;
+    border-radius: 6px;
+    font-size: .92rem;
+    font-weight: 600;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .btn:hover { text-decoration: none; border-color: var(--accent); color: var(--accent); }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+  }
+  .btn.primary:hover { opacity: .88; color: var(--bg); }
+
+  /* ---- river divider ---- */
+  .river { display: block; width: 100%; height: 46px; margin: 1.5rem 0; color: var(--accent); opacity: .5; }
+
+  /* ---- sections ---- */
+  section { padding: 2.4rem 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
+  }
+  p + p { margin-top: 1rem; }
+  .lead { color: var(--ink-soft); }
+
+  /* ---- flow ---- */
+  .flow {
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 1.4rem;
+    font-family: var(--mono);
+    font-size: .84rem;
+    line-height: 2.05;
+    overflow-x: auto;
+  }
+  .flow b { color: var(--accent); font-weight: 600; }
+  .flow .dim { color: var(--ink-faint); }
+
+  /* ---- promises ---- */
+  .promises { list-style: none; margin-top: 1.3rem; display: grid; gap: 1.05rem; }
+  .promises li { padding-left: 1.35rem; position: relative; }
+  .promises li::before {
+    content: "〜";
+    position: absolute; left: 0; top: 0;
+    color: var(--accent);
+  }
+  .promises b { font-weight: 600; }
+  .promises span { color: var(--ink-soft); }
+
+  /* ---- principles ---- */
+  .principles { margin-top: 1.3rem; display: grid; gap: .55rem; }
+  .principles div {
+    font-family: var(--mono);
+    font-size: .86rem;
+    color: var(--ink-soft);
+    padding: .5rem .9rem;
+    border-left: 2px solid var(--accent-soft);
+  }
+  .principles div b { color: var(--ink); font-weight: 600; }
+
+  /* ---- status ---- */
+  .status-note {
+    margin-top: 1.2rem;
+    font-size: .92rem;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: .9rem 1.1rem;
+  }
+  table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; font-size: .88rem; }
+  th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 600; color: var(--ink-faint); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+  td:not(:first-child) { font-family: var(--mono); font-size: .82rem; color: var(--ink-soft); white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+
+  /* ---- footer ---- */
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 2rem;
+    padding: 2.6rem 1.5rem 4rem;
+  }
+  .footer-inner { max-width: 44rem; margin: 0 auto; }
+  .maxim {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: var(--ink);
+    margin-bottom: 1.6rem;
+  }
+  .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: .9rem; }
+  .colophon { margin-top: 1.8rem; font-size: .8rem; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kanji">川 &nbsp;yuku kawa</div>
+  <h1>Kawa</h1>
+  <p class="thesis"><em>Agents are expendable. The mission is not.</em><br>
+  Change the agent. Keep the work.</p>
+  <blockquote class="epigraph">
+    <span class="jp">ゆく河の流れは絶えずして、しかももとの水にあらず。</span>
+    The flowing river never ceases, and yet the water is never the same.
+    <div class="src">— Kamo no Chōmei, <i>Hōjōki</i> (1212)</div>
+  </blockquote>
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/unagikudari/kawa">GitHub</a>
+    <a class="btn" href="https://github.com/unagikudari/kawa/blob/main/docs/specification-v0.5.md">Specification</a>
+    <a class="btn" href="#status">Status</a>
+  </div>
+</header>
+
+<svg class="river" viewBox="0 0 800 46" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 14 C 120 4, 240 24, 360 14 S 600 4, 800 14" fill="none" stroke="currentColor" stroke-width="1.4"/>
+  <path d="M0 26 C 140 16, 260 36, 400 26 S 660 16, 800 26" fill="none" stroke="currentColor" stroke-width="1" opacity=".6"/>
+  <path d="M0 38 C 100 30, 280 46, 420 38 S 640 30, 800 38" fill="none" stroke="currentColor" stroke-width=".8" opacity=".35"/>
+</svg>
+
+<main>
+
+<section>
+  <h2>What Kawa is</h2>
+  <p>Kawa is an <b>event-sourced continuity and authority substrate</b> for organizations where humans and AI agents act over time. It preserves <b>what happened, why decisions were made, what evidence supported them, who was allowed to act, and what outcomes were recorded</b> — so another human or agent can safely continue the work.</p>
+  <p class="lead">Kawa is not an agent framework, a chat system, or long-term conversation memory. Humans, agents, models, runtimes, and machines are replaceable <i>participants</i> passing through it; the durable record of intent, authority, evidence, and results is what remains.</p>
+  <div class="flow">
+Claude implements a change<br>
+<span class="dim">&nbsp;&nbsp;↓</span> Kawa preserves the <b>Plan</b>, <b>Work</b>, evidence, and <b>Result</b><br>
+<span class="dim">&nbsp;&nbsp;↓</span> Codex reviews it<br>
+<span class="dim">&nbsp;&nbsp;↓</span> Gemini attacks the assumptions<br>
+<span class="dim">&nbsp;&nbsp;↓</span> the original agent and its runtime disappear<br>
+<span class="dim">&nbsp;&nbsp;↓</span> a different agent connects<br>
+<span class="dim">&nbsp;&nbsp;↓</span> it pulls an orientation bundle and <b>continues the work</b>
+  </div>
+  <p style="margin-top:1.1rem" class="lead">The next participant does not need the original chat transcript to become useful.</p>
+</section>
+
+<section>
+  <h2>What it promises</h2>
+  <ul class="promises">
+    <li><b>Replace an agent without losing the work.</b> <span>Claude, Codex, Gemini, local models, humans, and runtimes are participants — not the memory.</span></li>
+    <li><b>See why a decision exists.</b> <span>Evidence, problems, plans, findings, revisions, and results remain traversable.</span></li>
+    <li><b>Do not treat AI inference as fact.</b> <span>Observation (what was measured) and Claim (what is asserted) are distinct, attributed records. Unknown is a valid standing.</span></li>
+    <li><b>Do not treat authentication as permission.</b> <span>Identity, capability, approval, and execution authority are separate concepts.</span></li>
+    <li><b>Do not treat “I ran it” as proof.</b> <span>Intent, execution, and recorded post-action observations are separate.</span></li>
+    <li><b>Keep working through partitions.</b> <span>Divergent histories are preserved and reconciled, never silently overwritten.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Founding principles</h2>
+  <div class="principles">
+    <div><b>Events are the Source of Truth.</b> Corrections create later events; history is not rewritten.</div>
+    <div><b>Derived views organize records; they do not become reality.</b> Projections, indexes, and caches are disposable.</div>
+    <div><b>Stable semantics. Replaceable mechanics.</b> Storage, transport, runtimes, and CLI vendors must remain swappable.</div>
+    <div><b>Agents communicate through shared state, not conversation.</b> Work waits for evidence — agents do not wait for agents.</div>
+    <div><b>Leaders die. The mission survives.</b> Coordination is a role over shared state, not ownership of the mission.</div>
+    <div><b>Prevent when possible; preserve and reconcile when not.</b> No manufactured exactly-once illusions.</div>
+  </div>
+</section>
+
+<section id="status">
+  <h2>Status</h2>
+  <p>Kawa is <b>pre-alpha</b>, developed in the open and dogfooded on a live multi-machine, multi-model fleet. The first milestone — <i>Kawa can use Kawa to implement Kawa</i> — is how the roadmap itself is executed: every step is planned, worked, reviewed, and recorded through Kawa's own event log.</p>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Component</th><th>Designed</th><th>Implemented</th><th>Deployable</th></tr>
+    <tr><td>Foundational specs</td><td>✓</td><td>n/a</td><td>—</td></tr>
+    <tr><td>Phase 0 substrate (Python + PostgreSQL)</td><td>✓</td><td>✓</td><td>✓ clean clone</td></tr>
+    <tr><td>Operator Console (local-first)</td><td>✓</td><td>✓</td><td>✓ local</td></tr>
+    <tr><td>Guided onboarding</td><td>✓</td><td>✗</td><td>—</td></tr>
+    <tr><td>Semantic Retrieval</td><td>✓</td><td>✗</td><td>—</td></tr>
+  </table>
+  </div>
+  <p class="status-note">Status is reported per component, never collapsed to one label — the same discipline Kawa demands of its records. The repository is not yet a production security or authority boundary.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p class="maxim">Preserve Events. Rebuild understanding. Prove authority.<br>Replace participants. Continue the work.</p>
+    <nav class="footer-links">
+      <a href="https://github.com/unagikudari/kawa">Repository</a>
+      <a href="https://github.com/unagikudari/kawa/blob/main/docs/specification-v0.5.md">Specification v0.5</a>
+      <a href="https://github.com/unagikudari/kawa/blob/main/docs/user-value-and-onboarding-v0.1.md">User value &amp; onboarding</a>
+      <a href="https://github.com/unagikudari/kawa/issues">Issues</a>
+    </nav>
+    <p class="colophon">yukukawa.dev — developed in the open. 行く川のながれは、絶えずして。</p>
+  </div>
+</footer>
+
+</body>
+</html>
